@@ -7,12 +7,14 @@ package com.practise.filterExample.listener;
 
 import javax.servlet.ServletRequestEvent;
 import javax.servlet.ServletRequestListener;
+import javax.servlet.annotation.WebListener;
 import javax.servlet.http.HttpServletRequest;
 
 /**
  *
  * @author chira
  */
+@WebListener
 public class UserLoginListener implements ServletRequestListener{
 
     @Override
