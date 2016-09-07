@@ -30,9 +30,9 @@ public class LoginController extends Controller {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        
+
         request.getRequestDispatcher("/WEB-INF/views/login.jsp").forward(request, response);
-        
+
     }
 //Post Method
 
@@ -44,20 +44,16 @@ public class LoginController extends Controller {
 
         //Returns user(object) after checkign username and password with database
         User user = userDAO.login(userName, password);
-        
+
         if (user == null) {
             //redirects invalid logins to login page with error
             response.sendRedirect(request.getContextPath() + "/login?error");
         } else //creates a session for the logged in user and redirects user to admin page
-        {
-            if (user.isStatus()) {//checks if the user status is active or not and redirects accordingly
-
+         if (user.isStatus()) {//checks if the user status is active or not and redirects accordingly
                 request.getSession(true).setAttribute("loggedIn", user);
                 response.sendRedirect(request.getContextPath() + "/admin/dashboard");
             } else {
                 response.sendRedirect(request.getContextPath() + "/login?inactiveuser");
-                
             }
-        }
     }
 }
